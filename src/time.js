@@ -20,20 +20,18 @@ document.addEventListener('DOMContentLoaded', function() {
             timeInfo.innerHTML = 'Loading...';
             return;
         }
-
+    
         const offsetHours = parseInt(data.utc_offset.split(':')[0]);
         const offsetMinutes = parseInt(data.utc_offset.split(':')[1]);
         const now = new Date();
         now.setHours(now.getHours() + offsetHours);
         now.setMinutes(now.getMinutes() + offsetMinutes);
-
-        timeInfo.innerHTML = `
-            <p><em>The current time is...</em></p>
-            <h2>${now.toLocaleTimeString('en-DE')}</h2>
-            <strong>${now.toLocaleDateString('en-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</strong>
-            <p>${data.timezone} (${data.abbreviation}) // Timezone & Abbreviation</p>
-            <p>UTC${data.utc_offset} // UTC Offset</p>
-        `;
+    
+        timeInfo.innerHTML = '<p><em>The current time is...</em></p>' +
+            '<h2>' + now.toLocaleTimeString('en-DE') + '</h2>' +
+            '<strong>' + now.toLocaleDateString('en-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) + '</strong>' +
+            '<p>' + data.timezone + ' (' + data.abbreviation + ') // Timezone & Abbreviation</p>' +
+            '<p>UTC' + data.utc_offset + ' // UTC Offset</p>';
     }
 
     fetchTimeData();
